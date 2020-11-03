@@ -8,38 +8,20 @@ import (
 	"net/http"
 )
 
-//UserController struct
-type UserController struct {
-	cartRepo  *repo.CartRepository
-	orderRepo *repo.OrderRepository
+//CartController struct
+type CartController struct {
+	cartRepo *repo.CartRepository
 }
 
-//NewUserController new user controller
-func NewUserController(db *mongo.Database) *UserController {
-	return &UserController{
-		cartRepo:  repo.GetCartRepository(db),
-		orderRepo: repo.GetOrderRepository(db),
-	}
-}
-
-//FetchOrders fetch orders of a user
-func (u *UserController) FetchOrders(ctx *gin.Context) {
-	userID, exists := ctx.Get("user_id")
-	if !exists {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "ID not found"})
-	}
-
-	orders, err := u.orderRepo.FetchOrdersByUserID(userID.(string))
-
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch orders"})
-	} else {
-		ctx.JSON(http.StatusOK, gin.H{"orders": orders, "message": "Orders Fetched Successfully"})
+//NewCartController new user controller
+func NewCartController(db *mongo.Database) *CartController {
+	return &CartController{
+		cartRepo: repo.GetCartRepository(db),
 	}
 }
 
 //FetchCart fetch cart of a user
-func (u *UserController) FetchCart(ctx *gin.Context) {
+func (u *CartController) FetchCart(ctx *gin.Context) {
 	userID, exists := ctx.Get("user_id")
 	if !exists {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "UserID not found"})
@@ -55,14 +37,14 @@ func (u *UserController) FetchCart(ctx *gin.Context) {
 }
 
 //AddBookToCart add book to the cart
-func (u *UserController) AddBookToCart(ctx *gin.Context) {
+func (u *CartController) AddBookToCart(ctx *gin.Context) {
 	userID, exists := ctx.Get("user_id")
 	if !exists {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "ID not found"})
 	}
 
 	var book models.Book
-	ctx.BindJSON(&book)
+	_ = ctx.BindJSON(&book)
 
 	cart, err := u.cartRepo.AddBook(userID.(string), book)
 

@@ -33,9 +33,14 @@ func main() {
 	router.POST("/book/create", bookController.CreateBook)
 	router.POST("/book/fetch", bookController.FetchBooks)
 
+	//Comment Routes
+	router.POST("/comment/create", bookController.AddComment)
+	router.POST("/comment/delete", bookController.RemoveComment)
+	router.POST("/comment", bookController.FetchComments)
+
 	//User Routes
 	router.GET("/user/cart", userController.FetchCart)
-	
+
 	//No Route
 	router.NoRoute(func(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, "Not Found!")
