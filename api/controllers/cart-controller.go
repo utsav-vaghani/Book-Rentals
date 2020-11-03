@@ -24,13 +24,13 @@ func NewCartController(db *mongo.Database) *CartController {
 func (u *CartController) FetchCart(ctx *gin.Context) {
 	userID, exists := ctx.Get("user_id")
 	if !exists {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "UserID not found"})
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "UserID not found!"})
 	}
 
-	cart, err := u.cartRepo.FetchCartByID(userID.(string))
+	cart, err := u.cartRepo.FetchCart(userID.(string))
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch cart"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch cart!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"cart": cart, "message": "Cart Fetched Successfully"})
 	}
@@ -46,11 +46,30 @@ func (u *CartController) AddBookToCart(ctx *gin.Context) {
 	var book models.Book
 	_ = ctx.BindJSON(&book)
 
-	cart, err := u.cartRepo.AddBook(userID.(string), book)
+	_, err := u.cartRepo.AddBook(userID.(string), book)
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart!", "error": err.Error()})
 	} else {
-		ctx.JSON(http.StatusOK, gin.H{"message": "Book added Successfully to the cart!", "Cart": cart})
+		ctx.JSON(http.StatusOK, gin.H{"message": "Book added Successfully to the cart"})
+	}
+}
+
+//RemoveBookFromCart add book to the cart
+func (u *CartController) RemoveBookFromCart(ctx *gin.Context) {
+	userID, exists := ctx.Get("user_id")
+	if !exists {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "UserID not found!"})
+	}
+
+	var book models.Book
+	_ = ctx.BindJSON(&book)
+
+	err := u.cartRepo.RemoveBook(userID.(string), book)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart!", "error": err.Error()})
+	} else {
+		ctx.JSON(http.StatusOK, gin.H{"message": "Book added Successfully to the cart"})
 	}
 }

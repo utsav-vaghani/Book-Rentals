@@ -10,29 +10,43 @@ import (
 
 //BookController struct
 type BookController struct {
-	bookRepo    *repo.BookRepository
+	bookRepo *repo.BookRepository
 }
 
 //NewBookController new book controller
 func NewBookController(db *mongo.Database) *BookController {
 	return &BookController{
-		bookRepo:    repo.GetBookRepository(db),
+		bookRepo: repo.GetBookRepository(db),
 	}
 }
 
 //CreateBook create new book
 func (b *BookController) CreateBook(ctx *gin.Context) {
 	var book models.Book
-	ctx.BindJSON(&book)
+	_ = ctx.BindJSON(&book)
 
 	err, created := b.bookRepo.CreateBook(book)
 
 	if created {
 		ctx.JSON(http.StatusCreated, gin.H{"message": "Successfully Book Created"})
 	} else if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Error in creating book" + err.Error()})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to create book!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusConflict, gin.H{"message": "Book Already Exist!"})
+	}
+}
+
+//UpdateBook update book
+func (b *BookController) UpdateBook(ctx *gin.Context) {
+	var book models.Book
+	_ = ctx.BindJSON(&book)
+
+	err := b.bookRepo.UpdateBook(book)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to update book!", "error": err.Error()})
+	} else {
+		ctx.JSON(http.StatusConflict, gin.H{"message": "Book updated Successfully"})
 	}
 }
 
@@ -41,9 +55,8 @@ func (b *BookController) FetchBooks(ctx *gin.Context) {
 	books, err := b.bookRepo.FetchBooks()
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch books"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch books!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"books": books, "message": "Books Fetched Successfully"})
 	}
 }
-

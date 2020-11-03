@@ -29,7 +29,7 @@ func (u *AuthController) RegisterUser(ctx *gin.Context) {
 	if registered {
 		ctx.JSON(http.StatusCreated, gin.H{"message": "Successfully Registered"})
 	} else if er != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Error in register user" + er.Error()})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to register user!", "error": er.Error()})
 	} else {
 		ctx.JSON(http.StatusConflict, gin.H{"message": "Email Id Already Exist!"})
 	}

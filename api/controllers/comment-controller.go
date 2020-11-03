@@ -24,14 +24,14 @@ func NewCommentController(db *mongo.Database) *CommentController {
 func (c *CommentController) FetchComments(ctx *gin.Context) {
 	bookID, exists := ctx.Get("book_id")
 	if !exists {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "BookID not found"})
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "BookID not found!"})
 		return
 	}
 
 	comments, err := c.commentRepo.FetchCommentsByID(bookID.(string))
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch orders"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to fetch orders!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"comments": comments, "message": "Orders Fetched Successfully"})
 	}
@@ -41,7 +41,7 @@ func (c *CommentController) FetchComments(ctx *gin.Context) {
 func (c *CommentController) AddComment(ctx *gin.Context) {
 	bookID, exists := ctx.Get("book_id")
 	if !exists {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "BookID not found"})
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "BookID not found!"})
 		return
 	}
 
@@ -49,14 +49,14 @@ func (c *CommentController) AddComment(ctx *gin.Context) {
 	_ = ctx.BindJSON(&comment)
 
 	if comment.UserID == "" {
-		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Invalid Request to add comment"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "UserID not found!"})
 		return
 	}
 
 	_, err := c.commentRepo.AddComment(bookID.(string), comment)
 
 	if err == nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add comment to book"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add comment to book!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"message": "Comment added successfully"})
 	}
@@ -68,14 +68,14 @@ func (c *CommentController) RemoveComment(ctx *gin.Context) {
 	commentID, exists2 := ctx.Get("comment_id")
 
 	if !exists1 || !exists2 {
-		ctx.JSON(http.StatusBadRequest, gin.H{"message": "BookID or CommentID not found"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "BookID or CommentID not found!"})
 		return
 	}
 
 	err := c.commentRepo.RemoveComment(bookID.(string), commentID.(string))
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to remove comment!"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to remove comment!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"message": "Comment remove successfully"})
 	}

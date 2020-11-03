@@ -21,8 +21,8 @@ func GetCartRepository(db *mongo.Database) *CartRepository {
 	}
 }
 
-//FetchCartByID fetch cart by its ID
-func (c *CartRepository) FetchCartByID(userID string) (models.Cart, error) {
+//FetchCart fetch cart by its ID
+func (c *CartRepository) FetchCart(userID string) (models.Cart, error) {
 	var cart models.Cart
 	err := c.db.FindOne(context.TODO(), bson.M{"user_id": userID}).Decode(&cart)
 
@@ -31,7 +31,7 @@ func (c *CartRepository) FetchCartByID(userID string) (models.Cart, error) {
 
 //AddBook new cart
 func (c *CartRepository) AddBook(userID string, book models.Book) (models.Cart, error) {
-	var cart  = models.Cart{}
+	var cart = models.Cart{}
 	err := c.db.FindOne(context.TODO(), bson.M{"user_id": userID}).Decode(&cart)
 
 	opts := options.FindOneAndUpdate().SetUpsert(true)
@@ -47,8 +47,8 @@ func (c *CartRepository) AddBook(userID string, book models.Book) (models.Cart, 
 }
 
 //RemoveBook book from cart
-func (c *CartRepository) RemoveBook(userID string, book models.Book) (models.Cart, error) {
-	var cart  = models.Cart{}
+func (c *CartRepository) RemoveBook(userID string, book models.Book) error {
+	var cart = models.Cart{}
 	err := c.db.FindOne(context.TODO(), bson.M{"user_id": userID}).Decode(&cart)
 
 	opts := options.FindOneAndUpdate().SetUpsert(true)
@@ -60,5 +60,5 @@ func (c *CartRepository) RemoveBook(userID string, book models.Book) (models.Car
 
 	err = c.db.FindOneAndUpdate(context.TODO(), cart, update, opts).Decode(&cart)
 
-	return cart, err
+	return err
 }

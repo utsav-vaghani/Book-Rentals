@@ -20,9 +20,11 @@ func main() {
 	}
 
 	//Controllers
-	userController := controllers.NewUserController(db)
-	bookController := controllers.NewBookController(db)
 	authController := controllers.NewAuthController(db)
+	bookController := controllers.NewBookController(db)
+	cartController := controllers.NewCartController(db)
+	commentController := controllers.NewCommentController(db)
+	orderController := controllers.NewOrderController(db)
 
 	//User Routes
 	router.POST("/auth/register", authController.RegisterUser)
@@ -31,15 +33,22 @@ func main() {
 
 	//Book Routes
 	router.POST("/book/create", bookController.CreateBook)
-	router.POST("/book/fetch", bookController.FetchBooks)
+	router.POST("/book/update", bookController.UpdateBook)
+	router.POST("/book", bookController.FetchBooks)
+
+	//Cart Routes
+	router.POST("/cart/addBook", cartController.AddBookToCart)
+	router.POST("/cart/removeBook", cartController.RemoveBookFromCart)
+	router.POST("/cart", cartController.FetchCart)
 
 	//Comment Routes
-	router.POST("/comment/create", bookController.AddComment)
-	router.POST("/comment/delete", bookController.RemoveComment)
-	router.POST("/comment", bookController.FetchComments)
+	router.POST("/comment/create", commentController.AddComment)
+	router.POST("/comment/delete", commentController.RemoveComment)
+	router.POST("/comment", commentController.FetchComments)
 
-	//User Routes
-	router.GET("/user/cart", userController.FetchCart)
+	//Order Routes
+	router.POST("/order/create", orderController.NewOrder)
+	router.POST("/order", orderController.FetchOrders)
 
 	//No Route
 	router.NoRoute(func(ctx *gin.Context) {
