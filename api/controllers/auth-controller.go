@@ -22,7 +22,7 @@ func NewAuthController(db *mongo.Database) *AuthController {
 //RegisterUser New User
 func (u *AuthController) RegisterUser(ctx *gin.Context) {
 	var user models.User
-	ctx.BindJSON(&user)
+	_ = ctx.BindJSON(&user)
 
 	er, registered := u.userRepo.Register(user)
 
@@ -38,7 +38,7 @@ func (u *AuthController) RegisterUser(ctx *gin.Context) {
 //LoginUser Login user
 func (u *AuthController) LoginUser(ctx *gin.Context) {
 	var userDto dtos.LoginDto
-	ctx.BindJSON(&userDto)
+	_ = ctx.BindJSON(&userDto)
 
 	user := u.userRepo.Login(userDto)
 	//jwt token remaining generation remaining
