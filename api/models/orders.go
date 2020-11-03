@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 //StatusType types of order status
 type StatusType string
 
@@ -9,11 +11,12 @@ const (
 	Delivered StatusType = "Delivered"
 )
 
-//Orders struct
-type Orders struct {
+//Order struct
+type Order struct {
+	ID          string     `json:"_id"`
 	UserID      string     `json:"user_id"`
 	Books       []Books    `json:"books"`
 	TotalAmount float64    `json:"total_amount"`
-	Time        int64      `json:"time"`
+	Time        time.Time  `json:"time"`
 	Status      StatusType `json:"status"`
 }

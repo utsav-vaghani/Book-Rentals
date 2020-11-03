@@ -22,19 +22,23 @@ func main() {
 	//Controllers
 	userController := controllers.NewUserController(db)
 	bookController := controllers.NewBookController(db)
+	authController := controllers.NewAuthController(db)
 
 	//User Routes
-	router.POST("/user/register",userController.RegisterUser)
-	router.POST("/user/login",userController.LoginUser)
-	router.GET("/user/authenticate",userController.AuthenticateUser)
+	router.POST("/auth/register", authController.RegisterUser)
+	router.POST("/auth/login", authController.LoginUser)
+	router.GET("/auth/authenticate", authController.AuthenticateUser)
 
 	//Book Routes
-	router.POST("/book/create",bookController.CreateBook)
-	router.POST("/book/fetch",bookController.FetchBooks)
+	router.POST("/book/create", bookController.CreateBook)
+	router.POST("/book/fetch", bookController.FetchBooks)
 
+	//User Routes
+	router.GET("/user/cart", userController.FetchCart)
+	
 	//No Route
-	router.NoRoute( func(ctx *gin.Context) {
-		ctx.JSON(http.StatusNotFound,"Not Found!")
+	router.NoRoute(func(ctx *gin.Context) {
+		ctx.JSON(http.StatusNotFound, "Not Found!")
 	})
 
 	// server listening

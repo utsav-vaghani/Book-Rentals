@@ -2,6 +2,7 @@ package models
 
 //Book struct
 type Book struct {
+	ID          string `json:"_id"`
 	Title       string `json:"title"`
 	Author      string `json:"author"`
 	Description string `json:"description"`

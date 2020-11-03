@@ -6,6 +6,7 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 //BookRepository struct
@@ -51,4 +52,17 @@ func (b *BookRepository) FetchBooks() ([]models.Book, error) {
 	}
 
 	return books, nil
+}
+
+//UpdateBook update book
+func (b *BookRepository) UpdateBook(book models.Book) error {
+	filter := bson.M{
+		"_id": book.ID,
+	}
+
+	opts := options.FindOneAndUpdate().SetUpsert(true)
+
+	err := b.db.FindOneAndUpdate(context.TODO(), filter, book, opts).Decode(&book)
+
+	return err
 }

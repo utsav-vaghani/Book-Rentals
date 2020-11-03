@@ -41,3 +41,23 @@ func (c *CommentRepository) AddComment(bookID string, comment models.Comment) (m
 
 	return updatedComments, err
 }
+
+//RemoveComment remove comment
+func (c *CommentRepository) RemoveComment(bookID, commentID string) error {
+	var comments = models.Comments{}
+	err := c.db.FindOne(context.TODO(), bson.M{"book_id": bookID}).Decode(&comments)
+
+	if err != nil {
+		return err
+	}
+
+	opts := options.FindOneAndUpdate().SetUpsert(true)
+
+	update := bson.M{
+		"$pull": bson.M{"comments.$.comments._id": commentID},
+	}
+
+	err = c.db.FindOneAndUpdate(context.TODO(), comments, update, opts).Decode(&comments)
+
+	return err
+}
