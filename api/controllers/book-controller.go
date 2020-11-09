@@ -41,9 +41,10 @@ func (b *BookController) UpdateBook(ctx *gin.Context) {
 	var book models.Book
 	_ = ctx.BindJSON(&book)
 
-	err := b.bookRepo.UpdateBook(book)
-
-	if err != nil {
+	res, err := b.bookRepo.UpdateBook(book)
+	if res.MatchedCount == 0 {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "No matching document found!"})
+	} else if res.ModifiedCount == 0 {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to update book!", "error": err.Error()})
 	} else {
 		ctx.JSON(http.StatusConflict, gin.H{"message": "Book updated Successfully"})

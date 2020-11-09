@@ -5,8 +5,8 @@ import (
 	"../models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 //BookRepository struct
@@ -55,14 +55,16 @@ func (b *BookRepository) FetchBooks() ([]models.Book, error) {
 }
 
 //UpdateBook update book
-func (b *BookRepository) UpdateBook(book models.Book) error {
+func (b *BookRepository) UpdateBook(book models.Book) (*mongo.UpdateResult, error) {
+	_id, _ := primitive.ObjectIDFromHex(book.ID)
 	filter := bson.M{
-		"_id": book.ID,
+		"_id": _id,
+	}
+	book1 := bson.M{
+		"$set": book,
 	}
 
-	opts := options.FindOneAndUpdate().SetUpsert(true)
+	res, err := b.db.UpdateOne(context.TODO(), filter, book1)
 
-	err := b.db.FindOneAndUpdate(context.TODO(), filter, book, opts).Decode(&book)
-
-	return err
+	return res, err
 }

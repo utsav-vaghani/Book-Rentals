@@ -52,6 +52,7 @@ func (o *OrderRepository) NewOrder(order models.Order) error {
 
 //CheckoutOrder checkout order
 func (o *OrderRepository) CheckoutOrder(orderID string) error {
-	_, err := o.db.DeleteOne(context.TODO(), bson.M{"_id": primitive.ObjectIDFromHex(orderID)})
+	_id, _ := primitive.ObjectIDFromHex(orderID)
+	_, err := o.db.DeleteOne(context.TODO(), bson.M{"_id": _id})
 	return err
 }
