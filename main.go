@@ -48,7 +48,7 @@ func main() {
 
 	//Order Routes
 	router.POST("/order/create", orderController.NewOrder)
-	router.POST("/order", orderController.FetchOrders)
+	router.POST("/order", orderController.FetchOrdersByUserID)
 
 	//No Route
 	router.NoRoute(func(ctx *gin.Context) {

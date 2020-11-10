@@ -7,6 +7,7 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"log"
 )
 
 //BookRepository struct
@@ -81,4 +82,23 @@ func (b *BookRepository) FetchBooks() ([]models.Book, error) {
 	}
 
 	return books, nil
+}
+
+//UpdateStock update stock of book
+func (b *BookRepository) UpdateStock(bookID string, quantity int64) error {
+	filter := bson.M{
+		"id": bookID,
+	}
+
+	update := bson.M{
+		"$inc": bson.M{
+			"stock": -quantity,
+		},
+	}
+
+	var book models.Book
+
+	err := b.db.FindOneAndUpdate(context.TODO(), filter, update).Decode(&book)
+	log.Println(err)
+	return err
 }

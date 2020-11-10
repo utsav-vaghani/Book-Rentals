@@ -63,6 +63,7 @@ func (u *CartController) RemoveBookFromCart(ctx *gin.Context) {
 
 	if books.UserID == "" {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "User ID not found"})
+		return
 	}
 
 	err := u.cartRepo.RemoveBook(books)

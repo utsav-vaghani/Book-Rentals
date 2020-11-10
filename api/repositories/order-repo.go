@@ -2,11 +2,12 @@ package repo
 
 import (
 	"../../config"
+	"../../utils"
 	"../models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"time"
 )
 
 //OrderRepository struct
@@ -40,32 +41,9 @@ func (o *OrderRepository) FetchOrdersByUserID(userID string) ([]models.Order, er
 
 //NewOrder place new order
 func (o *OrderRepository) NewOrder(order models.Order) error {
-	var findOrder models.Order
-	err := o.db.FindOne(context.TODO(), order).Decode(&findOrder)
+	order.Time = time.Now()
+	order.ID = utils.GetObjectID()
+	_, err := o.db.InsertOne(context.TODO(), order)
 
-	if err == mongo.ErrNoDocuments {
-		_, err = o.db.InsertOne(context.TODO(), order)
-	}
-	//book, err := u.bookRepo.FetchBookByID(books.BookID)
-	//
-	//if err == mongo.ErrNoDocuments {
-	//	ctx.JSON(http.StatusBadRequest, gin.H{"message": "Book does not exist!"})
-	//	return
-	//} else if err != nil {
-	//	ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart!!"})
-	//	return
-	//}
-	//
-	//if book.Stock < books.Quantity {
-	//	ctx.JSON(http.StatusBadRequest, gin.H{"message": "stock is not available"})
-	//	return
-	//}
-	return err
-}
-
-//CheckoutOrder checkout order
-func (o *OrderRepository) CheckoutOrder(orderID string) error {
-	_id, _ := primitive.ObjectIDFromHex(orderID)
-	_, err := o.db.DeleteOne(context.TODO(), bson.M{"_id": _id})
 	return err
 }
