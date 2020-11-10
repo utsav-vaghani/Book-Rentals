@@ -27,28 +27,28 @@ func main() {
 	orderController := controllers.NewOrderController(db)
 
 	//User Routes
-	router.POST("/auth/register", authController.RegisterUser)
-	router.POST("/auth/login", authController.LoginUser)
-	router.GET("/auth/authenticate", authController.AuthenticateUser)
+	router.POST("/api/auth/register", authController.RegisterUser)
+	router.POST("/api/auth/login", authController.LoginUser)
+	router.GET("/api/auth/authenticate", authController.AuthenticateUser)
 
 	//Book Routes
-	router.POST("/book/create", bookController.CreateBook)
-	router.POST("/book/update", bookController.UpdateBook)
-	router.POST("/book", bookController.FetchBooks)
+	router.POST("/api/book/create", bookController.CreateBook)
+	router.POST("/api/book/update", bookController.UpdateBook)
+	router.POST("/api/book", bookController.FetchBooks)
 
 	//Cart Routes
-	router.POST("/cart/addBook", cartController.AddBookToCart)
-	router.POST("/cart/removeBook", cartController.RemoveBookFromCart)
-	router.POST("/cart/", cartController.FetchCart)
+	router.POST("/api/cart/addBook", cartController.AddBookToCart)
+	router.POST("/api/cart/removeBook", cartController.RemoveBookFromCart)
+	router.POST("/api/cart/", cartController.FetchCart)
 
 	//Comment Routes
-	router.POST("/comment/create", commentController.AddComment)
-	router.POST("/comment/delete", commentController.RemoveComment)
-	router.POST("/comment/", commentController.FetchComments)
+	router.POST("/api/comment/create", commentController.AddComment)
+	router.POST("/api/comment/delete", commentController.RemoveComment)
+	router.POST("/api/comment/", commentController.FetchComments)
 
 	//Order Routes
-	router.POST("/order/create", orderController.NewOrder)
-	router.POST("/order", orderController.FetchOrdersByUserID)
+	router.POST("/api/order/create", orderController.NewOrder)
+	router.POST("/api/order", orderController.FetchOrdersByUserID)
 
 	//No Route
 	router.NoRoute(func(ctx *gin.Context) {

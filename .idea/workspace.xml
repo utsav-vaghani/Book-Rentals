@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9f088b69-ec20-473c-aea7-a6f417653798" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/controllers/cart-controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/cart-controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/controllers/order-controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/order-controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/order.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/repositories/book-repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/repositories/book-repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/repositories/order-repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/repositories/order-repo.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
