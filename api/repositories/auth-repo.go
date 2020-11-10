@@ -28,6 +28,7 @@ func (u *AuthRepository) Register(user models.User) (error, bool) {
 		hashedPass, er := utils.Encrypt(user.Password)
 		if err == nil {
 			user.Password = hashedPass
+			user.ID = utils.GetObjectID()
 			_, err = u.db.InsertOne(context.TODO(), user)
 
 			if err == nil {
@@ -50,4 +51,3 @@ func (u *AuthRepository) Login(user dtos.LoginDto) *models.User {
 
 	return nil
 }
-

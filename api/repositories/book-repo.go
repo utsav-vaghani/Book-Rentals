@@ -2,10 +2,10 @@ package repo
 
 import (
 	"../../config"
+	"../../utils"
 	"../models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -27,6 +27,7 @@ func (b *BookRepository) CreateBook(book models.Book) (error, bool) {
 	err := b.db.FindOne(context.TODO(), bson.M{"title": book.Title, "author": book.Author, "owner_id": book.OwnerID}).Decode(&tempBook)
 
 	if err == mongo.ErrNoDocuments {
+		book.ID = utils.GetObjectID()
 		_, err = b.db.InsertOne(context.TODO(), book)
 
 		if err == nil {
@@ -35,6 +36,34 @@ func (b *BookRepository) CreateBook(book models.Book) (error, bool) {
 	}
 
 	return err, false
+}
+
+//UpdateBook update book
+func (b *BookRepository) UpdateBook(book models.Book) (*mongo.UpdateResult, error) {
+	filter := bson.M{
+		"id": book.ID,
+	}
+
+	update := bson.M{
+		"$set": book,
+	}
+
+	res, err := b.db.UpdateOne(context.TODO(), filter, update)
+
+	return res, err
+}
+
+//FetchBookByID fetch book of given id
+func (b *BookRepository) FetchBookByID(id string) (models.Book, error) {
+	var book models.Book
+
+	filter := bson.M{
+		"id": id,
+	}
+
+	err := b.db.FindOne(context.TODO(), filter).Decode(&book)
+
+	return book, err
 }
 
 //FetchBooks fetch all books from DB
@@ -52,19 +81,4 @@ func (b *BookRepository) FetchBooks() ([]models.Book, error) {
 	}
 
 	return books, nil
-}
-
-//UpdateBook update book
-func (b *BookRepository) UpdateBook(book models.Book) (*mongo.UpdateResult, error) {
-	_id, _ := primitive.ObjectIDFromHex(book.ID)
-	filter := bson.M{
-		"_id": _id,
-	}
-	book1 := bson.M{
-		"$set": book,
-	}
-
-	res, err := b.db.UpdateOne(context.TODO(), filter, book1)
-
-	return res, err
 }

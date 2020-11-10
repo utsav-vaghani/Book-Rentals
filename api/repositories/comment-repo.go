@@ -2,6 +2,7 @@ package repo
 
 import (
 	"../../config"
+	"../../utils"
 	"../models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
@@ -22,7 +23,7 @@ func GetCommentRepository(db *mongo.Database) *CommentRepository {
 }
 
 //FetchCommentsByID fetch comments of a book
-func (c *CommentRepository) FetchCommentsByID(bookID string) (models.Comments, error) {
+func (c *CommentRepository) FetchCommentsByBookID(bookID string) (models.Comments, error) {
 	var comments models.Comments
 	err := c.db.FindOne(context.TODO(), bson.M{"book_id": bookID}).Decode(&comments)
 
@@ -30,34 +31,45 @@ func (c *CommentRepository) FetchCommentsByID(bookID string) (models.Comments, e
 }
 
 //AddComment add comment
-func (c *CommentRepository) AddComment(bookID string, comment models.Comment) (models.Comments, error) {
+func (c *CommentRepository) AddComment(comment models.Comment) error {
 	opts := options.FindOneAndUpdate().SetUpsert(true)
 
 	var updatedComments models.Comments
-	filter := bson.M{"book_id": bookID}
-	update := bson.M{"$push": bson.M{"comments.$.comments": comment}}
+
+	filter := bson.M{
+		"book_id": comment.BookID,
+	}
+
+	comment.ID = utils.GetObjectID()
+
+	update := bson.M{
+		"$push": bson.M{
+			"comments": comment,
+		},
+	}
 
 	err := c.db.FindOneAndUpdate(context.TODO(), filter, update, opts).Decode(&updatedComments)
 
-	return updatedComments, err
+	return err
 }
 
 //RemoveComment remove comment
 func (c *CommentRepository) RemoveComment(bookID, commentID string) error {
 	var comments = models.Comments{}
-	err := c.db.FindOne(context.TODO(), bson.M{"book_id": bookID}).Decode(&comments)
 
-	if err != nil {
-		return err
+	filter := bson.M{
+		"book_id": bookID,
 	}
-
-	opts := options.FindOneAndUpdate().SetUpsert(true)
 
 	update := bson.M{
-		"$pull": bson.M{"comments.$.comments._id": commentID},
+		"$pull": bson.M{
+			"comments": bson.M{
+				"id": commentID,
+			},
+		},
 	}
 
-	err = c.db.FindOneAndUpdate(context.TODO(), comments, update, opts).Decode(&comments)
+	err := c.db.FindOneAndUpdate(context.TODO(), filter, update).Decode(&comments)
 
 	return err
 }

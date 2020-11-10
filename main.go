@@ -37,14 +37,14 @@ func main() {
 	router.POST("/book", bookController.FetchBooks)
 
 	//Cart Routes
-	router.POST("/cart/:userID/addBook", cartController.AddBookToCart)
-	router.POST("/cart/:userID/removeBook", cartController.RemoveBookFromCart)
-	router.POST("/cart/:userID", cartController.FetchCart)
+	router.POST("/cart/addBook", cartController.AddBookToCart)
+	router.POST("/cart/removeBook", cartController.RemoveBookFromCart)
+	router.POST("/cart/", cartController.FetchCart)
 
 	//Comment Routes
 	router.POST("/comment/create", commentController.AddComment)
 	router.POST("/comment/delete", commentController.RemoveComment)
-	router.POST("/comment", commentController.FetchComments)
+	router.POST("/comment/", commentController.FetchComments)
 
 	//Order Routes
 	router.POST("/order/create", orderController.NewOrder)

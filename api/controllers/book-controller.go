@@ -5,6 +5,7 @@ import (
 	"../repositories"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
+	"log"
 	"net/http"
 )
 
@@ -41,7 +42,10 @@ func (b *BookController) UpdateBook(ctx *gin.Context) {
 	var book models.Book
 	_ = ctx.BindJSON(&book)
 
+	log.Println(book)
+
 	res, err := b.bookRepo.UpdateBook(book)
+
 	if res.MatchedCount == 0 {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "No matching document found!"})
 	} else if res.ModifiedCount == 0 {

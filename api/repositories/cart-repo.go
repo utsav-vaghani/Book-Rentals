@@ -30,19 +30,19 @@ func (c *CartRepository) FetchCart(userID string) (models.Cart, error) {
 }
 
 //AddBook new cart
-func (c *CartRepository) AddBook(userID string, book models.Books) (models.Cart, error) {
+func (c *CartRepository) AddBook(books models.Books) (models.Cart, error) {
 	var cart models.Cart
 
 	filter := bson.M{
-		"user_id": userID,
+		"user_id": books.UserID,
 	}
 
 	update := bson.M{
 		"$inc": bson.D{
-			{"total_amount", book.Price},
+			{"total_amount", float64(books.Quantity) * books.Price},
 		},
 		"$push": bson.M{
-			"books": book,
+			"books": books,
 		},
 	}
 
@@ -54,33 +54,43 @@ func (c *CartRepository) AddBook(userID string, book models.Books) (models.Cart,
 }
 
 //RemoveBook book from cart
-func (c *CartRepository) RemoveBook(userID string, book models.Books) error {
+func (c *CartRepository) RemoveBook(books models.Books) error {
 	var cart = models.Cart{}
 
 	filter := bson.M{
-		"user_id": userID,
-		"books":   book,
-	}
-	update1 := bson.M{
-		"$unset": bson.M{
-			"books.$": true,
+		"user_id": books.UserID,
+		"books": bson.M{
+			"$elemMatch": bson.M{
+				"book_id": books.BookID,
+			},
 		},
 	}
-
-	_ = c.db.FindOneAndUpdate(context.TODO(), filter, update1)
 
 	update := bson.M{
 		"$inc": bson.D{
-			{"total_amount", -book.Price},
-		},
-		"$pull": bson.M{
-			"books": nil,
+			{"total_amount", -float64(books.Quantity) * books.Price},
+			{"books.$.quantity", -books.Quantity},
 		},
 	}
-	filter = bson.M{
-		"user_id": userID,
-	}
+
 	err := c.db.FindOneAndUpdate(context.TODO(), filter, update).Decode(&cart)
+
+	filter = bson.M{
+		"user_id": books.UserID,
+	}
+
+	update = bson.M{
+		"$pull": bson.M{
+			"books": bson.M{
+				"book_id": books.BookID,
+				"quantity": bson.M{
+					"$lte": 0,
+				},
+			},
+		},
+	}
+
+	err = c.db.FindOneAndUpdate(context.TODO(), filter, update).Decode(&cart)
 
 	return err
 }

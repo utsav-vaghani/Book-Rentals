@@ -46,7 +46,20 @@ func (o *OrderRepository) NewOrder(order models.Order) error {
 	if err == mongo.ErrNoDocuments {
 		_, err = o.db.InsertOne(context.TODO(), order)
 	}
-
+	//book, err := u.bookRepo.FetchBookByID(books.BookID)
+	//
+	//if err == mongo.ErrNoDocuments {
+	//	ctx.JSON(http.StatusBadRequest, gin.H{"message": "Book does not exist!"})
+	//	return
+	//} else if err != nil {
+	//	ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart!!"})
+	//	return
+	//}
+	//
+	//if book.Stock < books.Quantity {
+	//	ctx.JSON(http.StatusBadRequest, gin.H{"message": "stock is not available"})
+	//	return
+	//}
 	return err
 }
 

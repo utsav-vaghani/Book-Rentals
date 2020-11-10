@@ -39,16 +39,15 @@ func (u *CartController) FetchCart(ctx *gin.Context) {
 
 //AddBookToCart add book to the cart
 func (u *CartController) AddBookToCart(ctx *gin.Context) {
-	userID := ctx.Params.ByName("userID")
-
-	if userID == "" {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "User ID not found"})
-	}
-
 	var books models.Books
 	_ = ctx.BindJSON(&books)
 
-	_, err := u.cartRepo.AddBook(userID, books)
+	if books.UserID == "" {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "User ID not found"})
+		return
+	}
+
+	_, err := u.cartRepo.AddBook(books)
 
 	if err != nil && err != mongo.ErrNoDocuments {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to add book to the cart!", "error": err.Error()})
@@ -59,16 +58,14 @@ func (u *CartController) AddBookToCart(ctx *gin.Context) {
 
 //RemoveBookFromCart add book to the cart
 func (u *CartController) RemoveBookFromCart(ctx *gin.Context) {
-	userID := ctx.Params.ByName("userID")
-
-	if userID == "" {
-		ctx.JSON(http.StatusNotFound, gin.H{"message": "User ID not found"})
-	}
-
 	var books models.Books
 	_ = ctx.BindJSON(&books)
 
-	err := u.cartRepo.RemoveBook(userID, books)
+	if books.UserID == "" {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "User ID not found"})
+	}
+
+	err := u.cartRepo.RemoveBook(books)
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to remove book from the cart!", "error": err.Error()})
