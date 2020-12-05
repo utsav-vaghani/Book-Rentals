@@ -1,7 +1,6 @@
 # Book-Rentals
-# Contest Reminder
 
-Web app for the user for login, sign up.
+## What it does?
 Once user logged-in user can take book on rent and also put book on rent so that one can use it.
 
 
