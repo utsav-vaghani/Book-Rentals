@@ -1,2 +1,2 @@
-# Rentals-Backend
-Backend for Rentals
+# Backend
+Backend for Book-Rentals
