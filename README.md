@@ -31,7 +31,7 @@ So I decied to make an app that provides such platform that one can put book on 
   * `cd Book-Rentals`
 * Install requirenments ( golang ) 
 * To run Backend server
-  * `cd Book-Rentals`
+  * `cd Book-Rentals/backend`
   * `npm start`
 
 ## Work
