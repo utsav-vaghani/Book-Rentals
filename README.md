@@ -37,7 +37,7 @@ So I decied to make an app that provides such platform that one can put book on 
 ## Work
 
 **Done till now**
-* All most all apis are created
+* All apis are created.
 
 **Remaining Work**
 * Backend : JsonWebToken creation and validation.
