@@ -1,0 +1,19 @@
+{
+  "name": "rentals-backend",
+  "version": "1.0.0",
+  "description": "backend for Rentals",
+  "main": "main.go",
+  "scripts": {
+    "start": "go run main.go"
+  },
+  "author": "Utsav Vaghani",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultra-utsav/Rentals-Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ultra-utsav/Rentals-Backend/issues"
+  },
+  "homepage": "https://github.com/ultra-utsav/Rentals-Backend#readme"
+}
