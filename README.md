@@ -5,7 +5,7 @@ Once user logged-in user can take book on rent and also put book on rent so that
 
 
 ## Motivation
-Sometimes we read a book for only once after that we do not required it. so we can give to some one so that one can read it and also we can make profit from it;).
+Sometimes we read a book for only once after that we do not required it. so we can give to some one so that one can read it and also we can make profit from it ;).
 
 So I decied to make an app that provides such platform that one can put book on rent and one can take book on rent.
 
