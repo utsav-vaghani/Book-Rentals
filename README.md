@@ -29,7 +29,7 @@ So I decied to make an app that provides such platform that one can put book on 
   * `git clone https://github.com/ultra-utsav/Book-Rentals.git`
 * Get into project directory
   * `cd Book-Rentals`
-* Install requirenments
+* Install requirenments ( golang ) 
 * To run Backend server
   * `cd Book-Rentals`
   * `npm start`
