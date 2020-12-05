@@ -26,15 +26,13 @@ So I decied to make an app that provides such platform that one can put book on 
 ## Installation
 
 * Clone project using git
-  * `git clone https://github.com/codestromer/ContestReminder.git`
-* [Create Virtual Environment](https://docs.python.org/3/library/venv.html) and activate
+  * `git clone https://github.com/ultra-utsav/Book-Rentals.git`
 * Get into project directory
-  * `cd ContestReminder`
+  * `cd Book-Rentals`
 * Install requirenments
-  * `pip install -r requirements.txt`
-* To run Django Project after [applying migrations](https://docs.djangoproject.com/en/3.1/topics/migrations/)
-  * `cd contestreminder`
-  * `python manage.py runserver`
+* To run Backend server
+  * `cd Book-Rentals`
+  * `npm start`
 
 ## Work
 
