@@ -50,8 +50,7 @@ SO I decied to make an app that provides such platform that one can put book on 
 
 ## Contributing
 
-* You can join [Whatsapp Group](https://chat.whatsapp.com/K8cEeEJZRFBDZeRijx2Mds)
-* As I used this for my own projects and implimented a year back, I know this might not be the perfect approach for all the projects out there. If you have any ideas, just open an issue and tell me what you think.
+* You can join [Whatsapp Group](https://chat.whatsapp.com/DzgB1KsgFbU2OK2c6VJkAY)
 * If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome.
 
 ## Handled By
