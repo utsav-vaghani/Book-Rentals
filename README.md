@@ -1,13 +1,13 @@
 # Book-Rentals
 
 ## What it does?
-Once user logged-in user can take book on rent and also put book on rent so that one can use it.
+Once the user logged-in user can take a book on rent and also put a book on rent so that one can use it.
 
 
 ## Motivation
-Sometimes we read a book for only once after that we do not required it. so we can give to some one so that one can read it and also we can make profit from it ;).
+Sometimes we read a book only once after that we do not require it. so we can give to someone so that one can read it and also we can make a profit from it ;).
 
-So I decied to make an app that provides such platform that one can put book on rent and one can take book on rent.
+So I decided to make an app that provides such a platform that one can put a book on rent and one can take a book on rent.
 
 ## Features
 * Authentication
@@ -37,14 +37,14 @@ So I decied to make an app that provides such platform that one can put book on 
 ## Work
 
 **Done till now**
-* All apis are working
+* All APIs are working
 
 **Remaining Work**
-* Backend : JsonWebToken creation and validation.
+* Backend: JsonWebToken creation and validation.
 * ALL the task of frontend
-* Add contributor page using github api
+* Add contributor page using GitHub API
 * Add Email verification after Signup
-* Test and Deploy to heroku
+* Test and Deploy to Heroku
 
 ## Contributing
 
