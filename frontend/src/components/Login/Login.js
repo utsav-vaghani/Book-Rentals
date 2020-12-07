@@ -6,14 +6,19 @@ const Login = () => {
   return (
     <div className="register">
       <img src={avatar} className="avatar" alt="" />
-      <h1>Register Here</h1>
+      <h1>LogIn</h1>
       <form>
-        <p>Username</p>
-        <input type="text" name="" placeholder="Enter Username" />
+        <p>Email</p>
+        <input type="email" name="email" placeholder="Enter Email..." />
         <p>Password</p>
-        <input type="password" name="" placeholder="Enter Password" />
-        <input type="submit" name="" value="SignUp" />
-        <Link to="/">Don't Have An Account?</Link>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password..."
+        />
+        <input type="submit" name="" value="Login" />
+        <Link to="/account/register">Don't Have An Account?</Link>
+        {/* TODO */}
         <Link to="/">Forgot Your Password</Link>
       </form>
     </div>
