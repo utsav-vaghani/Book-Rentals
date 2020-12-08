@@ -37,13 +37,14 @@ func (u *AuthController) RegisterUser(ctx *gin.Context) {
 
 //LoginUser Login user
 func (u *AuthController) LoginUser(ctx *gin.Context) {
-	var userDto dtos.LoginDto
-	_ = ctx.BindJSON(&userDto)
+	var loginDto dtos.LoginDto
+	_ = ctx.BindJSON(&loginDto)
 
-	user := u.userRepo.Login(userDto)
+	user := u.userRepo.Login(loginDto)
 	//jwt token remaining generation remaining
 	if user != nil {
-		ctx.JSON(http.StatusOK, gin.H{"message": "Login Successfully"})
+		userDto := dtos.MapUserToUserDto(user)
+		ctx.JSON(http.StatusOK, gin.H{"message": "Login Successfully", "user": userDto})
 	} else {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid Credentials!"})
 	}
