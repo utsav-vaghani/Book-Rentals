@@ -40,7 +40,7 @@ const Header = () => {
           <span>0</span>
         </Link>
       </li>
-      <img alt="" src="" class="menu-icon" onClick="menutoggle()" />
+      <img alt="" src="" className="menu-icon" />
     </div>
   );
 };
