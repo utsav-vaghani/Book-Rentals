@@ -18,11 +18,11 @@ const Home = () => {
               <br />
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
             </p>
-            <Link to="" class="btn">
+            <Link to="" className="btn">
               Explore Now &#8594;{" "}
             </Link>
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <img src={intro} alt="" />
           </div>
         </div>
