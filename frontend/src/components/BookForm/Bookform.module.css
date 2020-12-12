@@ -1,0 +1,60 @@
+body {
+    background-image: none;
+    background-color: #d7f0f4;
+}
+
+.heading {
+    font-family: 'Questrial', sans-serif;
+    font-weight: 400;
+    margin: 0 0 32px 4px;
+}
+
+.bookform {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1100px;
+    margin: auto;
+    padding: 10px 28px;
+}
+
+.leftCol {
+    width: 350px;
+    margin-top: 50px;
+}
+
+.rightCol {
+    margin-top: 100px;
+}
+
+
+
+.coverImg {
+    max-width: 300px;
+    filter: drop-shadow(20px 40px 94px rgba(0, 0, 0, 0.2));
+}
+
+.submitButton {
+    background-color: #f65944;
+    color: white;
+    margin-top: 16px;
+}
+.submitButton:hover {
+    background-color: #fd371d;
+    color: white;
+}
+
+.buttonArea {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.loginText {
+    margin-left: 16px;
+}
+
+@media only screen and (max-width: 700px) {
+    .rightCol {
+        display: none;
+    }
+}
