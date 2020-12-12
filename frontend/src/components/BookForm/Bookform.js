@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import styles from './Bookform.module.css';
 import booksImg from '../../images/books_02.svg';
 import CurrencyTextField from '@unicef/material-ui-currency-textfield';
+
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 function Bookform() {
     const [Title, setTitle] = useState('');
     const [Author, setAuthor] = useState('');
@@ -12,15 +15,17 @@ function Bookform() {
     const [Price, setPrice] = useState('');
     const [Stock, setStock] = useState('');
     const [NumberofPages, setNumberofPages] = useState('');
-    
-    
+    const [Picture,setPicture]=useState('')
+        
 
     const submit_handler = (e) => {
         e.preventDefault();
-        console.log(Title+Author+Description+OwnerID+Price+Stock+NumberofPages);
+        console.log(Title+Author+Description+OwnerID+Price+Stock+NumberofPages+Picture);
 
         //After logic of submit
     };
+
+
     return (
         <div className={styles.bookform}>
             <div className={styles.leftCol}>
@@ -102,6 +107,23 @@ function Bookform() {
                         value={NumberofPages}
                         onChange={(e) => setNumberofPages(e.target.value)}
                     />
+                    <div className={styles.buttonArea}>
+                        <label htmlFor="icon-button-photo">
+                            <IconButton backgroundColor="white">
+                                Image 
+                                <PhotoCamera />
+                            </IconButton>
+                        </label>
+                        <input
+                            accept="image/*"
+                            id="icon-button-photo"
+                            value={Picture}
+                            onChange={(e)=>setPicture(e.target.value)}
+                            type="file"
+                        />
+                    </div>
+                    
+                
                     <div className={styles.buttonArea}>
                         <Button
                             variant="contained"
