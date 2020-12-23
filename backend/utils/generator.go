@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"github.com/twinj/uuid"
 )
 
 func GetObjectID() string {
-	return primitive.NewObjectID().Hex()
+	return uuid.NewV4().String()
 }
