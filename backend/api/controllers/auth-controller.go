@@ -47,8 +47,8 @@ func (u *AuthController) LoginUser(ctx *gin.Context) {
 
 	if user := u.userRepo.Login(loginDto); user != nil {
 		userDto := dtos.MapUserToUserDto(user)
-		if token, err := createToken(userDto); err != nil {
-			ctx.JSON(http.StatusOK, gin.H{"message": "Login Successfully", "user": userDto, "token": token})
+		if token, err := createToken(userDto); err == nil {
+			ctx.JSON(http.StatusOK, gin.H{"message": "Login Successfully", "token": token})
 		} else {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to login"})
 		}
@@ -59,7 +59,7 @@ func (u *AuthController) LoginUser(ctx *gin.Context) {
 
 //AuthenticateUser authenticate user
 func (u *AuthController) AuthenticateUser(ctx *gin.Context) {
-	if userDto, err := extractTokenData(ctx.Request); err != nil {
+	if userDto, err := extractTokenData(ctx.Request); err == nil {
 		ctx.JSON(http.StatusOK, gin.H{"user": userDto})
 	} else {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid Token!"})
@@ -72,7 +72,9 @@ func createToken(userDto *dtos.UserDto) (string, error) {
 
 	claims["authorized"] = true
 	claims["id"] = userDto.ID
-	claims["exp"] = time.Now().Add(time.Minute * 1).Unix()
+	claims["name"] = userDto.Name
+	claims["email"] = userDto.Email
+	claims["exp"] = time.Now().Add(time.Minute*10).Unix()
 
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
@@ -106,7 +108,7 @@ func verifyToken(r *http.Request) (*jwt.Token, error) {
 
 func extractTokenData(r *http.Request) (*dtos.UserDto, error) {
 	token, err := verifyToken(r)
-
+	fmt.Println(token,err)
 	if err != nil {
 		return nil, err
 	}
@@ -119,6 +121,7 @@ func extractTokenData(r *http.Request) (*dtos.UserDto, error) {
 		email := claims["email"].(string)
 
 		if id != "" || name != "" || email != "" {
+
 			return &dtos.UserDto{
 				ID:    id,
 				Name:  name,

@@ -26,11 +26,10 @@ func (u *AuthRepository) Register(user models.User) (error, bool) {
 
 	if err == mongo.ErrNoDocuments {
 		hashedPass, er := utils.Encrypt(user.Password)
-		if err == nil {
+		if er == nil {
 			user.Password = hashedPass
 			user.ID = utils.GetObjectID()
 			_, err = u.db.InsertOne(context.TODO(), user)
-
 			if err == nil {
 				return er, true
 			}
