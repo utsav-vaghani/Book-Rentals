@@ -9,11 +9,14 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
     "@unicef/material-ui-currency-textfield": "^0.8.6",
+    "axios": "^0.21.1",
+    "jsonwebtoken": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-toastify": "^6.2.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
