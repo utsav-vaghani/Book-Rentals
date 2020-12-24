@@ -1,21 +1,57 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './Register.module.css';
 import booksImg from '../../images/books_02.svg';
+import { AiOutlineLoading } from 'react-icons/ai';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Register() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        address: '',
+        password: '',
+    });
 
-    const submit_handler = (e) => {
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+
+    const submit_handler = async (e) => {
         e.preventDefault();
-        console.log(name + email + address + password);
+        console.log(formData);
 
-        //After logic of submit
+        // Checking if any filed is empty
+        if (
+            !Object.values(formData).every(
+                (field) => field !== '' && field !== null,
+            )
+        )
+            toast(
+                `please enter ${Object.keys(formData).find(
+                    (key) => formData[key] === '',
+                )}`,
+            );
+        else {
+            try {
+                setButtonDisabled(true);
+                const res = await axios.post(
+                    `${BACKEND_URL}/api/auth/register`,
+                    formData,
+                );
+                if (res.status === 201) setRegisterSuccess(true);
+                toast(res.data.message);
+                setButtonDisabled(false);
+            } catch (error) {
+                toast(error.response.data.message);
+                setButtonDisabled(false);
+            }
+        }
     };
     return (
         <div className={styles.register}>
@@ -28,8 +64,13 @@ function Register() {
                         variant="outlined"
                         fullWidth
                         style={{ backgroundColor: 'white' }}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={formData.name}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                [e.target.id]: e.target.value,
+                            })
+                        }
                     />
                     <TextField
                         id="email"
@@ -38,8 +79,13 @@ function Register() {
                         fullWidth
                         margin="normal"
                         style={{ backgroundColor: 'white' }}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={formData.email}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                [e.target.id]: e.target.value,
+                            })
+                        }
                     />
                     <TextField
                         id="address"
@@ -49,11 +95,16 @@ function Register() {
                         multiline
                         margin="normal"
                         style={{ backgroundColor: 'white' }}
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        value={formData.address}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                [e.target.id]: e.target.value,
+                            })
+                        }
                     />
                     <TextField
-                        id="pass"
+                        id="password"
                         label="Password"
                         variant="outlined"
                         type="password"
@@ -61,8 +112,13 @@ function Register() {
                         fullWidth
                         margin="normal"
                         style={{ backgroundColor: 'white' }}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                [e.target.id]: e.target.value,
+                            })
+                        }
                     />
                     <div className={styles.buttonArea}>
                         <Button
@@ -74,7 +130,14 @@ function Register() {
                             }}
                             color="primary"
                             type="submit"
+                            disabled={buttonDisabled}
                         >
+                            {buttonDisabled && (
+                                <AiOutlineLoading
+                                    className={styles.rotate}
+                                    style={{ marginRight: '0.5rem' }}
+                                />
+                            )}
                             Sign up
                         </Button>
                         <div className={styles.loginText}>
@@ -87,6 +150,13 @@ function Register() {
             <div className={styles.rightCol}>
                 <img src={booksImg} className={styles.coverImg} alt="Books" />
             </div>
+            <ToastContainer />
+            {registerSuccess && (
+                <Redirect
+                    push
+                    to="/account/signin?registrationStatus=success"
+                />
+            )}
         </div>
     );
 }
