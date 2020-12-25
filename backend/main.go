@@ -1,17 +1,29 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
 	"./config"
 	"./utils"
 	"github.com/gin-gonic/gin"
-	"log"
-	"net/http"
+	cors "github.com/itsjamie/gin-cors"
 
 	"./api/controllers"
 )
 
 func main() {
 	router := gin.Default()
+
+	// CORS Middleware
+	router.Use(cors.Middleware(cors.Config{
+		Origins:         "*",
+		Methods:         "GET, PUT, POST, DELETE",
+		RequestHeaders:  "Origin, Authorization, Content-Type",
+		ExposedHeaders:  "",
+		Credentials:     true,
+		ValidateHeaders: false,
+	}))
 
 	//DB Connection
 	db, er := utils.GetConnection()
