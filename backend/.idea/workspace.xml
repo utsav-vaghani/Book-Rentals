@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f088b69-ec20-473c-aea7-a6f417653798" name="Default Changelist" comment="" />
+    <list default="true" id="9f088b69-ec20-473c-aea7-a6f417653798" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login/Login.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
