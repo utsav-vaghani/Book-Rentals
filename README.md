@@ -29,7 +29,8 @@ So I decided to make an app that provides such a platform that one can put a boo
   * `git clone https://github.com/ultra-utsav/Book-Rentals.git`
 * Get into project directory
   * `cd Book-Rentals`
-* Install requirenments ( golang ) 
+* Install All the dependencies
+  * `go get ./...`
 * To run Backend server
   * `cd Book-Rentals/backend`
   * `npm start`
