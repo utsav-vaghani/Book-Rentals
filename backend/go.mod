@@ -12,9 +12,4 @@ require (
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
-//
-//replace (
-//	github.com/ultra-utsav/Book-Rentals/backend/
-//    api/config latest => ./api/ latest
-//	source latest => target latest
-//)
+
