@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"../../config"
 	"../dtos"
 	"../models"
 	"../repositories"
 	"fmt"
+	"github.com/Book-Rentals/config"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -74,7 +74,7 @@ func createToken(userDto *dtos.UserDto) (string, error) {
 	claims["id"] = userDto.ID
 	claims["name"] = userDto.Name
 	claims["email"] = userDto.Email
-	claims["exp"] = time.Now().Add(time.Minute*10).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 10).Unix()
 
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
@@ -108,7 +108,7 @@ func verifyToken(r *http.Request) (*jwt.Token, error) {
 
 func extractTokenData(r *http.Request) (*dtos.UserDto, error) {
 	token, err := verifyToken(r)
-	fmt.Println(token,err)
+	fmt.Println(token, err)
 	if err != nil {
 		return nil, err
 	}

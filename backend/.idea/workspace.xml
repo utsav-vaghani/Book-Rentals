@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f088b69-ec20-473c-aea7-a6f417653798" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../frontend/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login/Login.js" afterDir="false" />
-    </list>
+    <list default="true" id="9f088b69-ec20-473c-aea7-a6f417653798" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,8 +30,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="go" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -46,10 +44,22 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="277" y="57" key="SettingsEditor" timestamp="1605011266128">
+    <state x="561" y="245" key="#Go_Modules" timestamp="1609080532018">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605011266128" />
+    <state x="561" y="245" key="#Go_Modules/0.0.1536.824@0.0.1536.824" timestamp="1609080532018" />
+    <state x="223" y="67" width="1089" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609077919603">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" width="1089" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1609077919603" />
+    <state x="662" y="272" key="EnvironmentVariablesDialog" timestamp="1609080528635">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="662" y="272" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1609080528635" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1609077981211">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609077981211" />
     <state x="537" y="109" key="VCS.ChangeListViewerDialog" timestamp="1604049611815">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
