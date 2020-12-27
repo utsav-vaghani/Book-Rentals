@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 
-	"./config"
-	"./utils"
 	"github.com/gin-gonic/gin"
 	cors "github.com/itsjamie/gin-cors"
+	"github.com/ultra-utsav/Book-Rentals/backend/config"
+	"github.com/ultra-utsav/Book-Rentals/backend/utils"
 
-	"./api/controllers"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/controllers"
 )
 
 func main() {
@@ -64,7 +64,7 @@ func main() {
 
 	//No Route
 	router.NoRoute(func(ctx *gin.Context) {
-		ctx.JSON(http.StatusNotFound, "Not Found!")
+		ctx.JSON(http.StatusNotFound, "Not Found")
 	})
 
 	// server listening

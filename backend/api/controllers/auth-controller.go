@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"../dtos"
-	"../models"
-	"../repositories"
 	"fmt"
-	"github.com/Book-Rentals/config"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/dtos"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/models"
+	repo "github.com/ultra-utsav/Book-Rentals/backend/api/repositories"
+	"github.com/ultra-utsav/Book-Rentals/backend/config"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"

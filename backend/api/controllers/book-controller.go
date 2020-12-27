@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"../models"
-	"../repositories"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/models"
+	repo "github.com/ultra-utsav/Book-Rentals/backend/api/repositories"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"

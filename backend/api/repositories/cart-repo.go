@@ -1,9 +1,9 @@
 package repo
 
 import (
-	"../../config"
-	"../models"
 	"context"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/models"
+	"github.com/ultra-utsav/Book-Rentals/backend/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

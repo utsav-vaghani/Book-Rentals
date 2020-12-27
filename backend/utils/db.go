@@ -1,27 +1,27 @@
 package utils
 
 import (
-	"../config"
 	"context"
+	"github.com/ultra-utsav/Book-Rentals/backend/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 )
 
 //GetConnection get new connection of MongoDB
-func GetConnection() (*mongo.Database,error) {
+func GetConnection() (*mongo.Database, error) {
 	//select client options
 	clientOptions := options.Client().ApplyURI(config.MongoURI)
 
 	//connect to MongoDB
-	mongoClient, err := mongo.Connect(context.TODO(),clientOptions)
+	mongoClient, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
 		log.Println("Error in connecting to MongoDB" + err.Error())
-		return nil,err
+		return nil, err
 	}
 
-	log.Println("Connected to MongoDB : "+ config.MongoURI)
+	log.Println("Connected to MongoDB : " + config.MongoURI)
 
-	return mongoClient.Database(config.Database),nil
+	return mongoClient.Database(config.Database), nil
 }

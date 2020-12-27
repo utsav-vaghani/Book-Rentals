@@ -32,7 +32,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="go" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -43,7 +43,14 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="545" y="120" width="445" height="600" key="#Build_Tags_&amp;_Vendoring" timestamp="1609082747130">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="545" y="120" width="445" height="600" key="#Build_Tags_&amp;_Vendoring/0.0.1536.824@0.0.1536.824" timestamp="1609082747130" />
     <state x="561" y="245" key="#Go_Modules" timestamp="1609080532018">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -56,10 +63,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="662" y="272" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1609080528635" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1609077981211">
+    <state x="277" y="57" key="SettingsEditor" timestamp="1609086881928">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609077981211" />
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609086881928" />
     <state x="537" y="109" key="VCS.ChangeListViewerDialog" timestamp="1604049611815">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

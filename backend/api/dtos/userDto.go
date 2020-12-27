@@ -1,7 +1,7 @@
 package dtos
 
 import (
-	"../models"
+	"github.com/ultra-utsav/Book-Rentals/backend/api/models"
 )
 
 type UserDto struct {
