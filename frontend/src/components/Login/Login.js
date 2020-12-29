@@ -46,7 +46,7 @@ function Login() {
         const res = await axios.post(`${BACKEND_URL}/api/auth/login`, formData);
 
         if (res.status === 200) {
-          setUser(res.data.token);
+          setUser(res.data.access_token);
           setLoginSuccess(true);
         }
 
