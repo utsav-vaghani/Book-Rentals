@@ -31,8 +31,13 @@ func main() {
 		log.Panic(er)
 	}
 
+	client, er := utils.InitRedis()
+	if er != nil {
+		log.Panic(er)
+	}
+
 	//Controllers
-	authController := controllers.NewAuthController(db)
+	authController := controllers.NewAuthController(db, client)
 	bookController := controllers.NewBookController(db)
 	cartController := controllers.NewCartController(db)
 	commentController := controllers.NewCommentController(db)
@@ -41,6 +46,7 @@ func main() {
 	//User Routes
 	router.POST("/api/auth/register", authController.RegisterUser)
 	router.POST("/api/auth/login", authController.LoginUser)
+	router.GET("/api/auth/logout",authController.LogoutUser)
 	router.GET("/api/auth/authenticate", authController.AuthenticateUser)
 
 	//Book Routes

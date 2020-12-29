@@ -6,7 +6,11 @@ const Database = "Rentals"
 
 const MongoURI = "mongodb://127.0.0.1:27017/"
 
-const ACCESS_SECRET = "bookrentalskwociitkharagpur"
+const AccessSecret = "bookrentalskwociitkharagpuraccess"
+
+const RefreshSecret = "bookrentalskwociitkharagpurrefresh"
+
+const RedisDsn = "localhost:6379"
 
 const (
 	User    = "Users"

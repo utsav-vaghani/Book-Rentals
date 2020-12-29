@@ -2,6 +2,7 @@ package utils
 
 import (
 	"context"
+	"github.com/go-redis/redis"
 	"github.com/ultra-utsav/Book-Rentals/backend/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -24,4 +25,13 @@ func GetConnection() (*mongo.Database, error) {
 	log.Println("Connected to MongoDB : " + config.MongoURI)
 
 	return mongoClient.Database(config.Database), nil
+}
+
+//InitRedis init connection to redis
+func InitRedis() (*redis.Client, error) {
+	client := redis.NewClient(&redis.Options{Addr: config.RedisDsn})
+
+	_, err := client.Ping().Result()
+
+	return client, err
 }
