@@ -30,7 +30,7 @@ So I decided to make an app that provides such a platform that one can put a boo
 * Get into project directory
   * `cd Book-Rentals`
 * Install All the dependencies
-  * `go get ./...`
+  * `go build ./...`
 * To run Backend server
   * `cd Book-Rentals/backend`
   * `npm start`
