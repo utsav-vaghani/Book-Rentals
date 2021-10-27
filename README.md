@@ -33,7 +33,7 @@ So I decided to make an app that provides such a platform that one can put a boo
   * `go build ./...`
 * To run Backend server
   * `cd Book-Rentals/backend`
-  * `npm start`
+  * `go run main.go`
 
 ## Work
 
